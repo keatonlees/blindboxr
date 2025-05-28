@@ -10,7 +10,12 @@ import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import React, { Suspense, useEffect, useState } from "react";
 
-export default function BlindBox(props) {
+interface PropTypes {
+  prizes: object;
+  setBlindbox: (value: string) => void;
+}
+
+export default function BlindBox(props: PropTypes) {
   const { prizes, setBlindbox } = props;
 
   const [isOpen, setIsOpen] = useState(false);
