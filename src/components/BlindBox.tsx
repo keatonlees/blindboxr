@@ -94,11 +94,7 @@ export default function BlindBox(props: PropTypes) {
       <div className="absolute bottom-4 bg-neutral-100 shadow-xl flex gap-2 p-4 rounded-xl">
         {Object.keys(prizes).map((key, i) => (
           <div key={i} className="flex flex-col items-center">
-            <img
-              src={`/images/${key}`}
-              alt="test"
-              className="w-20 aspect-square"
-            />
+            <img src={`/images/${key}`} alt="test" className="h-16" />
             <h1 className="font-bold">
               {(
                 (prizes[key as keyof typeof prizes] / weightTotal) *

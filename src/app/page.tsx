@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function App() {
   const [blindbox, setBlindbox] = useState("");
 
-  const blindboxes = ["Chiikawa", "Labubu"];
+  const blindboxes = ["Chiikawa", "Labubu", "Smiski"];
 
   const chiikawa_prizes = {
     "chiikawa/hachiware.png": 1,
@@ -31,6 +31,15 @@ export default function App() {
     "labubu/toffee.png": 4,
   };
 
+  const smiski_prizes = {
+    "smiski/momkid.png": 1,
+    "smiski/paint.png": 1,
+    "smiski/pearl.png": 1,
+    "smiski/sleep.png": 1,
+    "smiski/spilt.png": 1,
+    "smiski/sunmoon.png": 1,
+  };
+
   if (blindbox === "chiikawa") {
     return (
       <>
@@ -43,6 +52,13 @@ export default function App() {
       <>
         <Loader />
         <BlindBox prizes={labubu_prizes} setBlindbox={setBlindbox} />
+      </>
+    );
+  } else if (blindbox === "smiski") {
+    return (
+      <>
+        <Loader />
+        <BlindBox prizes={smiski_prizes} setBlindbox={setBlindbox} />
       </>
     );
   }

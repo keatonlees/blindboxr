@@ -9,9 +9,9 @@ export default function Chest(props) {
   const group = useRef(null)
   const boxLid = useRef(null)
 
-  const pitch1 = useRef(new Audio("/audio/magical-pitch-1.mp3"))
-  const pitch2 = useRef(new Audio("/audio/magical-pitch-2.mp3"))
-  const pitchOpen = useRef(new Audio("/audio/magical-open.mp3"))
+  const pitch1 = useRef(new Audio("/audio/pitch-1.mp3"))
+  const pitch2 = useRef(new Audio("/audio/pitch-2.mp3"))
+  const pitchOpen = useRef(new Audio("/audio/pitch-open.mp3"))
   const chestOpen = useRef(new Audio("/audio/chest-open.mp3"))
   
   const { nodes, materials, animations } = useGLTF('/models/scene.gltf')
@@ -61,30 +61,30 @@ export default function Chest(props) {
 
   }, [isResetting])
 
-  const handleHover = (state) => {
-    if (isOpen || isAnimating || isResetting) return;
+  // const handleHover = (state) => {
+  //   if (isOpen || isAnimating || isResetting) return;
 
-    const chest = group.current;
-    if (!chest) return;
+  //   const chest = group.current;
+  //   if (!chest) return;
 
-    if (state === "enter") {
-      gsap.to(chest.scale, {
-        x: 1.05,
-        y: 1.05,
-        z: 1.05,
-        duration: 0.3,
-        ease: "power2.out"
-      })
-    } else {
-      gsap.to(chest.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      })
-    }
-  }
+  //   if (state === "enter") {
+  //     gsap.to(chest.scale, {
+  //       x: 1.05,
+  //       y: 1.05,
+  //       z: 1.05,
+  //       duration: 0.3,
+  //       ease: "power2.out"
+  //     })
+  //   } else {
+  //     gsap.to(chest.scale, {
+  //       x: 1,
+  //       y: 1,
+  //       z: 1,
+  //       duration: 0.3,
+  //       ease: "power2.out"
+  //     })
+  //   }
+  // }
 
   const handleOpen = () => {
     if (isOpen || isAnimating || isResetting) return;
@@ -95,9 +95,9 @@ export default function Chest(props) {
     if (!chest || !lid) return;
 
     setIsAnimating(true);
-    pitch1.current.volume = 0.1;
-    pitch2.current.volume = 0.1;
-    pitchOpen.current.volume = 0.8;
+    pitch1.current.volume = 0.5;
+    pitch2.current.volume = 0.5;
+    pitchOpen.current.volume = 0.5;
     chestOpen.current.volume = 0.3;
 
     gsap.to(chest.scale, {
@@ -114,7 +114,7 @@ export default function Chest(props) {
       duration: 0.3,
       ease: "power2.out"
     })
-    .call(() => pitch1.current.play(), [], 0.1)
+    .call(() => pitch1.current.play(), [], 0)
     .to(chest.position, {
       y: -1,
       duration: 0.5,
@@ -126,7 +126,7 @@ export default function Chest(props) {
       ease: "power2.out",
       delay: 0.3
     })
-    .call(() => pitch2.current.play(), [], 1.2)
+    .call(() => pitch2.current.play(), [], 1.1)
     .to(chest.position, {
       y: -1,
       duration: 0.5,
@@ -176,8 +176,10 @@ export default function Chest(props) {
     .call(() => setIsOpen(true))
   }
 
+
+  // onPointerEnter={() => handleHover("enter")} onPointerLeave={() => handleHover("leave")}
   return (
-    <group onPointerEnter={() => handleHover("enter")} onPointerLeave={() => handleHover("leave")} onClick={handleOpen} ref={group} {...props} dispose={null} position={[0, -1, 0]}>
+    <group onClick={handleOpen} ref={group} {...props} dispose={null} position={[0, -1, 0]}>
       <group name="model" rotation={[-Math.PI / 2, 0, 0]} scale={200}>
         <group name="box" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group name="box_lid" ref={boxLid} position={[0, 0.86, -0.498]} rotation={[0, 0, 0]} >

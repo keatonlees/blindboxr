@@ -53,8 +53,8 @@ export default function Prize(props) {
 
       gsap.timeline()
       .to(object.scale, {
-        x: 2,
-        y: 2,
+        x: 1.5,
+        y: 1.5,
         duration: 1,
         ease: "power2.out"
       })
